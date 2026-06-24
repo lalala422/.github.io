@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
-title                    : "Your Name / Site Title"
+title                    : "Zuo Ye"
 title_separator          : "-"
 name                     : &name "Zuo Ye (叶左)"
 description              : &description "Your Name's academic portfolio"   # Update this with a general description of your site, this is the default if not overridden by a page
@@ -24,10 +24,10 @@ repository               : "academicpages/academicpages.github.io"
 author:
   # Biographic information
   avatar           : "profile.png"
-  name             : "Your Sidebar Name"
-  pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
+  name             : "Zuo Ye"
+  pronouns         : # example: "he/his"  
+  bio              : "Researcher in coding theory"
+  location         : "China"
   employer         : "Xidian University"
   uri              : # URL
   email            : "yezuo@xidian.edu.cn" 
