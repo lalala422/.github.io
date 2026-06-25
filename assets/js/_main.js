@@ -165,3 +165,55 @@ $(document).ready(function () {
   });
 
 });
+
+// Automatically show the most recent GitHub commit date and a simple page-view badge.
+const lastUpdated = document.querySelector('#last-updated');
+const visitorBadge = document.querySelector('#visitor-badge');
+
+function getGitHubPagesRepo() {
+  const host = window.location.hostname;
+
+  // For a standard user homepage such as https://zyprince007.github.io/
+  if (host.endsWith('.github.io')) {
+    const owner = host.replace('.github.io', '');
+    return { owner, repo: `${owner}.github.io` };
+  }
+
+  // Fallback for local preview or a custom domain. Change these two values if needed.
+  return { owner: 'lalala422', repo: 'lalala422.github.io' };
+}
+
+const { owner, repo } = getGitHubPagesRepo();
+
+if (visitorBadge) {
+  const pageId = `${owner}.${repo}`;
+  visitorBadge.src =
+    `https://visitor-badge.laobi.icu/badge?page_id=${encodeURIComponent(pageId)}&left_text=Page%20views&right_color=%237755d8&left_color=%23edf0ff&format=true`;
+}
+
+async function loadLastUpdated() {
+  if (!lastUpdated) return;
+
+  try {
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`, {
+      headers: { Accept: 'application/vnd.github+json' },
+    });
+
+    if (!response.ok) throw new Error('GitHub API request failed');
+
+    const commits = await response.json();
+    const dateText = commits?.[0]?.commit?.committer?.date || commits?.[0]?.commit?.author?.date;
+    if (!dateText) throw new Error('No commit date found');
+
+    const date = new Date(dateText);
+    lastUpdated.textContent = new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(date);
+  } catch (error) {
+    lastUpdated.textContent = 'Recently';
+  }
+}
+
+loadLastUpdated();
