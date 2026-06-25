@@ -741,3 +741,16 @@ time {
     flex-direction: column;
   }
 }
+
+.academic-link {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.35);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.academic-link:hover {
+  color: #1d4ed8;
+  border-bottom-color: #1d4ed8;
+}
